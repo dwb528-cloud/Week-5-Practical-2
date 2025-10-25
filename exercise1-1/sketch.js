@@ -34,3 +34,8 @@ function drawRects() {
         rect(rects[i].x, rects[i].y, rects[i].w, rects[i].h);
     }
 }
+
+function keyPressed () {
+    if (key === "SPACEBAR")
+        
+}
