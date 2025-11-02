@@ -16,11 +16,22 @@ function setup() {
 
 function draw() {
     background(255);
+    strokeWeight(0);
+    fill(255, 0, 255);
     square(player.x, player.y, player.size);
-}
-
-function keyPressed(){
-    if(key === "w") {
-        player -= y
+    if (keyIsPressed === true) {
+        if (key === 'w')
+            player.y --;
     }
+    if (keyIsPressed && key === 'a') {
+        player.x --;
+    }
+    if (keyIsPressed && key === 's') {
+         player.y ++;
+    }
+    if (keyIsPressed && key === 'd') {
+           player.x ++;
+    }
+    fill(0);
+    rect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
 }
