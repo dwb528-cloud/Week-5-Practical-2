@@ -9,9 +9,9 @@ function draw() {
     background (253, 218, 13);
     drawRects();
     for (let i = 0; i < rects.length; i++) {
-        if (i % 2) {
+        if (i % 2 ) {
         fill (0);
-    } else {
+    } else if (i % 2 == 0) {
         fill (255);
     }
     }
@@ -36,6 +36,7 @@ function drawRects() {
 }
 
 function keyPressed () {
-    if (key === "SPACEBAR")
-        
+    if (key === "a")
+        background(random(0, 255));
+        drawRects(); 
 }
