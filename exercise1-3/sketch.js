@@ -16,9 +16,13 @@ function setup() {
 
 function draw() {
     background(255);
+    //draw player
     strokeWeight(0);
     fill(255, 0, 255);
     square(player.x, player.y, player.size);
+    //moving player
+    let oldPlayerX = player.x + player.size;
+    let oldPlayerY = player.y + player.size;
     if (keyIsPressed === true) {
         if (key === 'w')
             player.y --;
@@ -32,6 +36,12 @@ function draw() {
     if (keyIsPressed && key === 'd') {
            player.x ++;
     }
+    //check collision with obstacle
+    if (player.x + player.size > obstacle.x && player.y + player.size > obstacle.y && player.x < obstacle.x + obstacle.width && player.y < obstacle.y + obstacle.height) {
+        oldPlayerX = obstacle.x;
+        oldPlayerY = player.y;
+    }
+    //draw obstacle
     fill(0);
     rect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
-}
+    }
