@@ -16,32 +16,38 @@ function setup() {
 
 function draw() {
     background(255);
-    //draw player
     strokeWeight(0);
     fill(255, 0, 255);
     square(player.x, player.y, player.size);
-    //moving player
-    let oldPlayerX = player.x + player.size;
-    let oldPlayerY = player.y + player.size;
-    if (keyIsPressed === true) {
-        if (key === 'w')
-            player.y --;
-    }
-    if (keyIsPressed && key === 'a') {
-        player.x --;
-    }
-    if (keyIsPressed && key === 's') {
-         player.y ++;
-    }
-    if (keyIsPressed && key === 'd') {
-           player.x ++;
-    }
-    //check collision with obstacle
-    if (player.x + player.size > obstacle.x && player.y + player.size > obstacle.y && player.x < obstacle.x + obstacle.width && player.y < obstacle.y + obstacle.height) {
-        oldPlayerX = obstacle.x;
-        oldPlayerY = player.y;
-    }
-    //draw obstacle
     fill(0);
     rect(obstacle.x, obstacle.y, obstacle.width, obstacle.height);
+    if (keyIsPressed) {
+        playerMove();
     }
+    }
+
+function playerMove() {
+   if (key === 'w' && canMove(0, -1)) {
+    player.y--;
+   }
+    if (key === 'a' && canMove (-1, 0)) {
+        player.x--;
+    }
+    if (key === 's' && canMove (0, 1)) {
+         player.y++;
+    }
+    if (key === 'd' && canMove (1, 0)) {
+           player.x++;
+    }
+}
+
+/**
+ * @param {number} xDir -1 = left; +1 = right; 0 otherwise
+ * @param {number} yDir -1 = down; +1 = up; 0 otherwise
+ */
+
+function canMove(xDir, yDir) {
+    let newX = player.x + xDir;
+    let newY = player.y + yDir;
+    return newX + player.size <= obstacle.x || newX >= obstacle.x + obstacle.width || newY + player.size <= obstacle.y || newY >= obstacle.y + obstacle.height;
+}
